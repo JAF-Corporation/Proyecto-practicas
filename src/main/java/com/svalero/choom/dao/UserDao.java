@@ -1,6 +1,7 @@
 package com.svalero.choom.dao;
 
 import com.svalero.choom.domain.User;
+import com.svalero.choom.exception.UserAlreadyExistException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +30,10 @@ public class UserDao {
         return Optional.ofNullable(user);
     }
 
-    public void add(User user) throws SQLException {
+    public void add(User user) throws SQLException, UserAlreadyExistException {
+        if (existUser(user.getUserID())){
+            throw new UserAlreadyExistException();
+        }
 
         String sql = "INSERT INTO USERS (username, password, email, personal_name, user_address, user_tlp, user_role) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -45,6 +49,11 @@ public class UserDao {
         statement.executeUpdate();
 
         statement.close();
+    }
+
+    private boolean existUser(int userID) throws SQLException {
+        Optional<User> user = findById(userID);
+        return user.isPresent();
     }
 
     // Devuelve la lista de usuarios

@@ -1,6 +1,7 @@
 package com.svalero.choom.dao;
 
 import com.svalero.choom.domain.Booking;
+import com.svalero.choom.exception.BookingAlreadyExistException;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -16,17 +17,26 @@ public class BookingDao {
         this.connection = connection;
     }
 
-    public void add(Booking boocking) throws SQLException {
+    public void add(Booking booking) throws SQLException, BookingAlreadyExistException {
+        if (existBooking(booking.getBookingID())){
+            throw new BookingAlreadyExistException();
+        }
+
         String sql = "INSERT INTO BOOKING (in_date, out_date, room_number, pay_state, pay_method) VALUES (?, ?, ?, ?, ?)";
         BookingDao boockingDao = new BookingDao(connection);
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setDate(1, java.sql.Date.valueOf(boocking.getCheckinDate()));
-        statement.setDate(2, java.sql.Date.valueOf(boocking.getCheckoutDate()));
-        statement.setInt(3, boocking.getNumRoom());
-        statement.setString(4, boocking.getState());
-        statement.setString(5, boocking.getPaymentMethod());
+        statement.setDate(1, java.sql.Date.valueOf(booking.getCheckinDate()));
+        statement.setDate(2, java.sql.Date.valueOf(booking.getCheckoutDate()));
+        statement.setInt(3, booking.getNumRoom());
+        statement.setString(4, booking.getState());
+        statement.setString(5, booking.getPaymentMethod());
         statement.executeUpdate();
+    }
+
+    private boolean existBooking(int bookingID) throws SQLException {
+        Optional<Booking> booking = findById(bookingID);
+        return booking.isPresent();
     }
 
     public ArrayList<Booking> findAll() throws SQLException {

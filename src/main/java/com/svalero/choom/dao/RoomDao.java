@@ -1,6 +1,7 @@
 package com.svalero.choom.dao;
 
 import com.svalero.choom.domain.Room;
+import com.svalero.choom.exception.RoomAlreadyExistException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,11 @@ public class RoomDao {
         this.connection = connection;
     }
 
-    public void add(Room room) throws SQLException {
+    public void add(Room room) throws SQLException, RoomAlreadyExistException {
+        if (existRoom(room.getRoomID())){
+            throw new RoomAlreadyExistException();
+        }
+
         String sql = "INSERT INTO ROOM (room_type, room_price, total_rooms) VALUES (?, ?, ?)";
         RoomDao roomDao = new RoomDao(connection);
 
@@ -26,6 +31,11 @@ public class RoomDao {
         statement.setFloat(2, room.getPrice());
         statement.setInt(3, room.getTotalRooms());
         statement.executeUpdate();
+    }
+
+    private boolean existRoom(int roomID) throws SQLException{
+        Optional<Room> room = findById(roomID);
+        return room.isPresent();
     }
 
     public ArrayList<Room> findAll() throws SQLException {
@@ -43,12 +53,12 @@ public class RoomDao {
         return rooms;
     }
 
-    public Optional<Room> findById(int id) throws SQLException {
+    public Optional<Room> findById(int roomID) throws SQLException {
         String sql = "SELECT * FROM ROOM WHERE id_room = ?";
         Room room = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, id);
+        statement.setInt(1, roomID);
         ResultSet resultSet = statement.executeQuery();
 
         if(resultSet.next()) {
@@ -82,10 +92,10 @@ public class RoomDao {
     }
 
 
-    private Room fromResultSet(ResultSet resultSet) {
+    private Room fromResultSet(ResultSet resultSet) throws SQLException {
         Room room = new Room();
 
-        room.setId(resultSet.getInt("id_room"));
+        room.setRoomID(resultSet.getInt("id_room"));
         room.setType(resultSet.getString("room_type"));
         room.setPrice(resultSet.getFloat("room_price"));
         room.setPrice(resultSet.getInt("total_rooms"));

@@ -84,7 +84,7 @@ public class HotelDao {
 
     // BUSQUEDA DE HOTELES POR NOMBRE O POR CIUDAD
 
-    public ArrayList<Hotel> findAllHotels(String searchText) throws SQLException{
+    public ArrayList<Hotel> findAllHotelsByText(String searchText) throws SQLException{
         ArrayList<Hotel> hotels = new ArrayList<>();
 
         String sql = "SELECT * FROM HOTEL WHERE INSTR(hotel_name,?) != 0 OR INSTR(hotel_city,?) != 0 ORDER BY id_hotel";
@@ -127,6 +127,22 @@ public class HotelDao {
         hotel.setCity(resultSet.getString("hotel_city"));
         hotel.setRating(resultSet.getFloat("hotel_rating"));
         return hotel;
+    }
+
+    // BUSCAR TODOS LOS HOTELES
+
+    public ArrayList<Hotel> searchAllHotel() throws SQLException{
+        ArrayList<Hotel> hotels = new ArrayList<>();
+
+        String sql = "SELECT * FROM HOTEL ORDER BY id_hotel";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()){
+            Hotel hotel = fromResultSet(resultSet);
+        }
+        return hotels;
+
     }
 }
 
