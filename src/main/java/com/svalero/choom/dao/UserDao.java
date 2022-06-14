@@ -1,5 +1,8 @@
 package com.svalero.choom.dao;
 
+import com.svalero.choom.domain.User;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class UserDao {
+
+    private Connection connection;
+
 
     public Optional<User> login(String username, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
@@ -34,7 +40,7 @@ public class UserDao {
         statement.setString(4, user.getPersonalName());
         statement.setString(5, user.getAddress());
         statement.setString(6, user.getTelephone());
-        statement.setString(7, user.getRole("user"));
+        statement.setString(7, "user");
 
         statement.executeUpdate();
 
@@ -122,13 +128,13 @@ public class UserDao {
         String sql = "UPDATE users SET username = ?, password = ?, email = ?, personal_name = ?, user_address = ?, user_tlp = ?, user_role = ? WHERE id_user = ?";
 
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setString(1, usuario.getUserName());
-        statement.setString(2, usuario.getPassword());
-        statement.setString(3, usuario.getEmail());
-        statement.setString(4, usuario.getPersonalName());
-        statement.setString(5, usuario.getAddress());
-        statement.setString(6, usuario.getTelephone());
-        statement.setString(7, usuario.getRole("user"));
+        statement.setString(1, user.getUsername());
+        statement.setString(2, user.getPassword());
+        statement.setString(3, user.getEmail());
+        statement.setString(4, user.getPersonalName());
+        statement.setString(5, user.getAddress());
+        statement.setString(6, user.getTelephone());
+        statement.setString(7, "user");
         statement.setInt(8, userId);
         int rows = statement.executeUpdate();
         return rows == 1;
