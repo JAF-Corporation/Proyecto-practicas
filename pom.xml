@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.svalero</groupId>
-  <artifactId>academia-servlet</artifactId>
+  <artifactId>CHOOM</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
@@ -61,7 +61,7 @@
   </dependencies>
 
   <build>
-    <finalName>academia-servlet</finalName>
+    <finalName>CHOOM</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
