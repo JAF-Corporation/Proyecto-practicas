@@ -6,6 +6,7 @@ public class Hotel {
     private String address;
     private String city;
     private float rating;
+    private int hotelCategoryID;
 
     public Hotel() {
     }
@@ -16,6 +17,23 @@ public class Hotel {
         this.address = address;
         this.city = city;
         this.rating = rating;
+    }
+
+    public Hotel(int hotelID, String name, String address, String city, float rating, int hotelCategoryID) {
+        this.hotelID = hotelID;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.rating = rating;
+        this.hotelCategoryID = hotelCategoryID;
+    }
+
+    public int getHotelCategoryID() {
+        return hotelCategoryID;
+    }
+
+    public void setHotelCategoryID(int hotelCategoryID) {
+        this.hotelCategoryID = hotelCategoryID;
     }
 
     public int getHotelID() {
