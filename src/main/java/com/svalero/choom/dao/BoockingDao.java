@@ -17,7 +17,7 @@ public class BoockingDao {
     }
 
     public void add(Boocking boocking) throws SQLException {
-        String sql = "INSERT INTO BOOKING (in_date, out_date, room_number, pay_state, pay_method) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO BOOKING (in_date, out_date, room_number, pay_state, pay_method) VALUES (?, ?, ?, ?, ?)";
         BoockingDao boockingDao = new BoockingDao(connection);
 
         PreparedStatement statement = connection.prepareStatement(sql);
