@@ -2,24 +2,24 @@ package com.svalero.choom.domain;
 
 import java.time.LocalDate;
 
-public class Boocking {
+public class Booking {
     private int bookingID;
     private LocalDate checkinDate;
-    private LocalDate chekoutDate;
+    private LocalDate checkoutDate;
     private int numRoom;
     private String state;
     private String paymentMethod;
 
-    public Boocking(int bookingID, LocalDate checkinDate, LocalDate chekoutDate, int numRoom, String state, String paymentMethod) {
+    public Booking(int bookingID, LocalDate checkinDate, LocalDate checkoutDate, int numRoom, String state, String paymentMethod) {
         this.bookingID = bookingID;
         this.checkinDate = checkinDate;
-        this.chekoutDate = chekoutDate;
+        this.checkoutDate = checkoutDate;
         this.numRoom = numRoom;
         this.state = state;
         this.paymentMethod = paymentMethod;
     }
 
-    public Boocking() {
+    public Booking() {
     }
 
     public int getBookingID() {
@@ -38,12 +38,12 @@ public class Boocking {
         this.checkinDate = checkinDate;
     }
 
-    public LocalDate getChekoutDate() {
-        return chekoutDate;
+    public LocalDate getCheckoutDate() {
+        return checkoutDate;
     }
 
-    public void setChekoutDate(LocalDate chekoutDate) {
-        this.chekoutDate = chekoutDate;
+    public void setCheckoutDate(LocalDate checkoutDate) {
+        this.checkoutDate = checkoutDate;
     }
 
     public int getNumRoom() {
