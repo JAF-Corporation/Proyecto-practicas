@@ -98,6 +98,20 @@ public class HotelDao {
         return hotels;
     }
 
+    public ArrayList<Hotel> findAllHotels() throws SQLException{
+        ArrayList<Hotel> hotels = new ArrayList<>();
+
+        String sql = "SELECT * FROM HOTEL ORDER BY hotel_name";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()){
+            Hotel hotel = fromResultSet(resultSet);
+            hotels.add(hotel);
+        }
+        return hotels;
+    }
+
     //MODIFICAR HOTEL POR ID
 
     public boolean modifyHotelByID(Hotel hotel, int hotelID) throws SQLException {
@@ -126,6 +140,7 @@ public class HotelDao {
         hotel.setAddress(resultSet.getString("hotel_address"));
         hotel.setCity(resultSet.getString("hotel_city"));
         hotel.setRating(resultSet.getFloat("hotel_rating"));
+        hotel.setHotelCategoryID(resultSet.getInt("id_category"));
         return hotel;
     }
 
