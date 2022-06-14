@@ -82,10 +82,10 @@ public class RoomDao {
     }
 
 
-    private Room fromResultSet(ResultSet resultSet) {
+    private Room fromResultSet(ResultSet resultSet) throws SQLException {
         Room room = new Room();
 
-        room.setId(resultSet.getInt("id_room"));
+        room.setRoomID(resultSet.getInt("id_room"));
         room.setType(resultSet.getString("room_type"));
         room.setPrice(resultSet.getFloat("room_price"));
         room.setPrice(resultSet.getInt("total_rooms"));
