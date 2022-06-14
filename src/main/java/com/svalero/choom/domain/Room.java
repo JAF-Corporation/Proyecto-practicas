@@ -3,13 +3,13 @@ package com.svalero.choom.domain;
 public class Room {
     private int roomID;
     private String type;
-    private float prive;
+    private float price;
     private int totalRooms;
 
-    public Room(int roomID, String type, float prive, int totalRooms) {
+    public Room(int roomID, String type, float price, int totalRooms) {
         this.roomID = roomID;
         this.type = type;
-        this.prive = prive;
+        this.price = price;
         this.totalRooms = totalRooms;
     }
 
@@ -32,12 +32,12 @@ public class Room {
         this.type = type;
     }
 
-    public float getPrive() {
-        return prive;
+    public float getPrice() {
+        return price;
     }
 
-    public void setPrive(float prive) {
-        this.prive = prive;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public int getTotalRooms() {

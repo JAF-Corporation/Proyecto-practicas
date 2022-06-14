@@ -8,17 +8,17 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class BoockingDao {
+public class BookingDao {
 
     private Connection connection;
 
-    public BoockingDao(Connection connection) {
+    public BookingDao(Connection connection) {
         this.connection = connection;
     }
 
     public void add(Booking boocking) throws SQLException {
         String sql = "INSERT INTO BOOKING (in_date, out_date, room_number, pay_state, pay_method) VALUES (?, ?, ?, ?, ?)";
-        BoockingDao boockingDao = new BoockingDao(connection);
+        BookingDao boockingDao = new BookingDao(connection);
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setDate(1, java.sql.Date.valueOf(boocking.getCheckinDate()));
@@ -77,7 +77,7 @@ public class BoockingDao {
 
     public void modify(int id, LocalDate checkinDate, LocalDate checkoutDate, int roomNumber, String state, String paymentMethod) throws SQLException {
         String sql = "UPDATE BOOKING SET in_date = ?, out_date = ?, room_number = ?, pay_state = ?, pay_method = ? WHERE id_booking = ?";
-        BoockingDao boockingDao = new BoockingDao(connection);
+        BookingDao boockingDao = new BookingDao(connection);
 
         PreparedStatement statement = connection.prepareStatement(sql);
 
