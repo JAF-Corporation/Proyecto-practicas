@@ -4,6 +4,7 @@ package com.svalero.choom.servlet;
 import com.svalero.choom.dao.Database;
 import com.svalero.choom.dao.UserDao;
 import com.svalero.choom.domain.User;
+import com.svalero.choom.exception.UserAlreadyExistException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,6 +48,9 @@ public class RegisterServlet extends HttpServlet {
         } catch (SQLException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el articulo</div>");
             sqle.printStackTrace();
+        } catch (UserAlreadyExistException uaee) {
+            out.println("<div class='alert alert-danger' role='alert'>ERROR: User already exists</div>");
+            uaee.printStackTrace();
         }
     }
 }
