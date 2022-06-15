@@ -58,7 +58,7 @@
                 %>
 
                 <div style="display: flex; justify-content: space-between;">
-                <li class="list-group-item"><strong><%= rooms.get(i).getType() %></strong></li>
+                   <li class="list-group-item"><strong><%= rooms.get(i).getType() %></strong></li>
                 <li class="list-group-item"><%= rooms.get(i).getTotalRooms() %></li>
                 <li class="list-group-item"><%= rooms.get(i).getPrice() %>&euro;</li>
                 </div>
