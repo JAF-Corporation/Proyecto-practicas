@@ -46,10 +46,10 @@ public class AddBookingServlet extends HttpServlet {
                     "  <h4 class='alert-heading'>Success booking</h4>\n" +
                     "  <p>The booking was made succesfully</p>\n" +
                     "  <hr>\n" +
-                    "  <p class='mb-0'><a href='/academia-servlet/index.jsp'>Go to menu</a></p>\n" +
+                    "  <p class='mb-0'><a href='/choom/index.jsp'>Go to menu</a></p>\n" +
                     "  </div>");
         }catch (SQLException sqlee) {
-            out.println("<div class='alert alert-danger' role='alert'>ERROR: Can not connect with database</div>");
+            out.println("<div class='alert alert-danger' role='alert'>ERROR: Can not connect to database</div>");
             sqlee.printStackTrace();
         }catch (BookingAlreadyExistException baee) {
             out.println("<div class='alert alert-danger' role='alert'>ERROR: This booking already exists</div>");
