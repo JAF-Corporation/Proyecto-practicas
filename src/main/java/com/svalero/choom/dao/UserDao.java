@@ -14,10 +14,6 @@ public class UserDao {
 
     private Connection connection;
 
-    public UserDao(Connection connection) {
-        this.connection = connection;
-    }
-
     public Optional<User> login(String username, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         User user = null;

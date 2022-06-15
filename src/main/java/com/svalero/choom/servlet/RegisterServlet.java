@@ -45,6 +45,9 @@ public class RegisterServlet extends HttpServlet {
         } catch (SQLException | UserAlreadyExistException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el articulo</div>");
             sqle.printStackTrace();
+        } catch (UserAlreadyExistException uaee) {
+            out.println("<div class='alert alert-danger' role='alert'>ERROR: User already exists</div>");
+            uaee.printStackTrace();
         }
     }
 }
