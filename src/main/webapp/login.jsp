@@ -53,7 +53,7 @@
                 <label for="floatingPassword">Password</label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
-            <button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="/choom/register.jsp" target="_blank" style="text-decoration:none; color:white">Sign in</button>
+            <button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="/choom/register.jsp" style="text-decoration:none; color:white">Sign in</button>
         </form>
         <div id="result"></div>
     </main>

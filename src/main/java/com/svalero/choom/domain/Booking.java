@@ -10,12 +10,23 @@ public class Booking {
     private String state;
     private String paymentMethod;
 
+    private int roomID;
+
+    private int userID;
+
     public Booking(int bookingID, LocalDate checkinDate, LocalDate checkoutDate, int numRoom, String state, String paymentMethod) {
         this.bookingID = bookingID;
         this.checkinDate = checkinDate;
         this.checkoutDate = checkoutDate;
         this.numRoom = numRoom;
         this.state = state;
+        this.paymentMethod = paymentMethod;
+    }
+
+    public Booking(LocalDate checkinDate, LocalDate checkoutDate, int numRoom, String paymentMethod) {
+        this.checkinDate = checkinDate;
+        this.checkoutDate = checkoutDate;
+        this.numRoom = numRoom;
         this.paymentMethod = paymentMethod;
     }
 
@@ -68,5 +79,21 @@ public class Booking {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

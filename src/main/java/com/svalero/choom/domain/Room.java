@@ -6,6 +6,8 @@ public class Room {
     private float price;
     private int totalRooms;
 
+    private int hotelID;
+
     public Room(int roomID, String type, float price, int totalRooms) {
         this.roomID = roomID;
         this.type = type;
@@ -48,4 +50,11 @@ public class Room {
         this.totalRooms = totalRooms;
     }
 
+    public int getHotelID() {
+        return hotelID;
+    }
+
+    public void setHotelID(int hotelID) {
+        this.hotelID = hotelID;
+    }
 }

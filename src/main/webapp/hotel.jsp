@@ -47,7 +47,7 @@
             </div>
             <ul style="display: flex;" class="list-group list-group-flush">
 
-                <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex;">
                 <li class="list-group-item"><strong>TYPE</strong></li>
                 <li class="list-group-item">AVAILABLE ROOMS</li>
                 <li class="list-group-item">PRICE</li>
@@ -57,10 +57,11 @@
                     for(int i=0; i < rooms.size(); i++) {
                 %>
 
-                <div style="display: flex; justify-content: space-between;">
+                <div style="display: flex;">
                 <li class="list-group-item"><strong><%= rooms.get(i).getType() %></strong></li>
                 <li class="list-group-item"><%= rooms.get(i).getTotalRooms() %></li>
                 <li class="list-group-item"><%= rooms.get(i).getPrice() %>&euro;</li>
+                <a href="booking.jsp?id=<%= rooms.get(i).getRoomID() %>" class="btn btn-primary">Booking</a>
                 </div>
 
                 <%
@@ -68,7 +69,6 @@
                 %>
             </ul>
             <div class="card-body">
-                <a href="#" class="btn btn-primary">Booking</a>
             </div>
         </div>
     </div>

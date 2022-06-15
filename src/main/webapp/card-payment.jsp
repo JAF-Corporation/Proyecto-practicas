@@ -13,10 +13,10 @@
 <%@ page import="com.svalero.choom.domain.Room" %>
 
 <%
-     User currentUser = (User) session.getAttribute("currentUser");
-        if (currentUser == null) {
-            response.sendRedirect("login.jsp");
-        }
+    User currentUser = (User) session.getAttribute("currentUser");
+    if (currentUser == null) {
+        response.sendRedirect("login.jsp");
+    }
 %>
 
 
@@ -24,7 +24,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Reservas</title>
+    <title>Pago</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css">
@@ -34,22 +34,15 @@
 
 </head>
 <body>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("form").on("submit", function(event) {
-            event.preventDefault();
-            var formValue = $(this).serialize();
-            $.post("booking", formValue, function(data) {
-                $("#result").html(data);
-            });
-        });
-    });
-</script>
+
+<%
+    String roomID = request.getParameter("id");
+%>
 
 <div class="container">
     <h2>Booking process</h2>
 
-    <form>
+    <form method="post" action="booking">
         <div class="mb-2">
             <label for="checkinDate" class="form-label">Checkin</label>
             <input name="checkinDate" type="date" class="form-control w-25" id="checkinDate">
@@ -59,8 +52,8 @@
             <input name="checkoutDate" type="date" class="form-control w-25" id="checkoutDate">
         </div>
         <div style="margin-top: 10px;" class="mb-2">
-             <label for="noomRoom" class="form-label">Total rooms</label>
-             <input class="quantity" id="noomRoom" min="0" name="numRoom" value="1" type="number">
+            <label for="noomRoom" class="form-label">Total rooms</label>
+            <input class="quantity" id="noomRoom" min="0" name="numRoom" value="1" type="number">
         </div>
         <div class="btn-group">
             <select class="btn btn-primary dropdown-toggle" name="paymentMethod" id="paymentMethod">
@@ -71,7 +64,7 @@
             </select>
         </div>
         <div style="margin-top: 30px;" class="btn.group">
-        <button type="submit" class="btn btn-primary">Confirm</button>
+            <button type="submit" class="btn btn-primary"><a href="login.jsp?id=<%= Integer.parseInt(roomID) %>" class="btn btn-primary" target="_blank"><strong>Confirm</strong></a></button>
         </div>
     </form>
     <div id="result"></div>

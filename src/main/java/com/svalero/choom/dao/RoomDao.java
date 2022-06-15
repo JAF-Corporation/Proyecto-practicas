@@ -69,7 +69,20 @@ public class RoomDao {
         return rooms;
     }
 
+    public int findHotelID(int roomID) throws SQLException {
+        String sql = "SELECT id_hotel FROM ROOM WHERE id_room = ?";
+        Room room = null;
 
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, roomID);
+        ResultSet resultSet = statement.executeQuery();
+
+        if(resultSet.next()) {
+            room = fromResultSet(resultSet);
+        }
+
+        return room.getHotelID();
+    }
 
     public Optional<Room> findById(int roomID) throws SQLException {
         String sql = "SELECT * FROM ROOM WHERE id_room = ?";
@@ -119,6 +132,7 @@ public class RoomDao {
         room.setType(resultSet.getString("room_type"));
         room.setPrice(resultSet.getFloat("room_price"));
         room.setTotalRooms(resultSet.getInt("total_rooms"));
+        room.setHotelID(resultSet.getInt("id_hotel"));
 
         return room;
     }

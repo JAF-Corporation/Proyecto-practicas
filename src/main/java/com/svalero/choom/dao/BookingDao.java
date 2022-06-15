@@ -17,20 +17,21 @@ public class BookingDao {
         this.connection = connection;
     }
 
-    public void add(Booking booking) throws SQLException, BookingAlreadyExistException {
+    public void add(Booking booking, int userID, int roomID) throws SQLException, BookingAlreadyExistException {
         if (existBooking(booking.getBookingID())){
             throw new BookingAlreadyExistException();
         }
 
-        String sql = "INSERT INTO BOOKING (in_date, out_date, room_number, pay_state, pay_method) VALUES (?, ?, ?, ?, ?)";
-        BookingDao boockingDao = new BookingDao(connection);
+        String sql = "INSERT INTO BOOKING (in_date, out_date, room_number, pay_state, pay_method, id_user, id_room) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setDate(1, java.sql.Date.valueOf(booking.getCheckinDate()));
         statement.setDate(2, java.sql.Date.valueOf(booking.getCheckoutDate()));
         statement.setInt(3, booking.getNumRoom());
-        statement.setString(4, booking.getState());
+        statement.setString(4, "Pendiente");
         statement.setString(5, booking.getPaymentMethod());
+        statement.setInt(6, userID);
+        statement.setInt(7, roomID);
         statement.executeUpdate();
     }
 
@@ -72,18 +73,19 @@ public class BookingDao {
 
     public Optional<Booking> findById(int id) throws SQLException {
         String sql = "SELECT * FROM BOOKING WHERE id_booking = ?";
-        Booking boocking = null;
+        Booking booking = null;
 
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
         ResultSet resultSet = statement.executeQuery();
 
         if(resultSet.next()) {
-            boocking = fromResultSet(resultSet);
+            booking = fromResultSet(resultSet);
         }
 
-        return Optional.ofNullable(boocking);
+        return Optional.ofNullable(booking);
     }
+
 
     public void modify(int id, LocalDate checkinDate, LocalDate checkoutDate, int roomNumber, String state, String paymentMethod) throws SQLException {
         String sql = "UPDATE BOOKING SET in_date = ?, out_date = ?, room_number = ?, pay_state = ?, pay_method = ? WHERE id_booking = ?";
@@ -120,6 +122,8 @@ public class BookingDao {
         booking.setNumRoom(resultSet.getInt("room_number"));
         booking.setState(resultSet.getString("pay_state"));
         booking.setPaymentMethod(resultSet.getString("pay_method"));
+        booking.setUserID(resultSet.getInt("id_user"));
+        booking.setRoomID(resultSet.getInt("id_room"));
 
         return booking;
     }
