@@ -53,6 +53,22 @@ public class RoomDao {
         return rooms;
     }
 
+    public ArrayList<Room> findByHotelID(int id) throws SQLException {
+        String sql = "SELECT * FROM ROOM WHERE id_hotel = ?";
+        ArrayList<Room> rooms = new ArrayList<>();
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        while(resultSet.next()) {
+            Room room = fromResultSet(resultSet);
+            rooms.add(room);
+        }
+
+        return rooms;
+    }
+
     public Optional<Room> findById(int roomID) throws SQLException {
         String sql = "SELECT * FROM ROOM WHERE id_room = ?";
         Room room = null;

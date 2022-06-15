@@ -29,11 +29,8 @@ public class RegisterServlet extends HttpServlet {
         String action = request.getParameter("action");
         String address = request.getParameter("user_address");
         String telephone = request.getParameter("user_tlp");
-        String role = request.getParameter("user_role");
-        Integer userId = Integer.valueOf(request.getParameter("id_user"));
 
-
-        User user = new User(userId, username, password, email, personalName, address, telephone, role);
+        User user = new User(personalName, username, password, email,  address, telephone);
 
         Database database = new Database();
         UserDao userDao = new UserDao(database.getConnection());
@@ -42,10 +39,10 @@ public class RegisterServlet extends HttpServlet {
                 userDao.add(user);
                 out.println("<div class='alert alert-success' role='alert'>El usuario se ha registrado correctamente</div>");
             } else {
-                userDao.modify(userId, user);
+                //userDao.modify(userId, user);
                 out.println("<div class='alert alert-success' role='alert'>El usuario se ha modificado correctamente</div>");
             }
-        } catch (SQLException sqle) {
+        } catch (SQLException | UserAlreadyExistException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el articulo</div>");
             sqle.printStackTrace();
         } catch (UserAlreadyExistException uaee) {

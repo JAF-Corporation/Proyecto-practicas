@@ -24,7 +24,7 @@
             sqle.printStackTrace();
         }
     } else {
-        textButton = "Registrar";
+        textButton = "Register";
     }
 %>
 
@@ -49,42 +49,38 @@
 </script>
 
 <div class="container">
-    <h2>Registro de un nuevo usuario</h2>
+    <h2>Sign In</h2>
     <form>
         <div class="mb-2">
-            <label for="username" class="form-label">Username:</label>
+            <label for="username" class="form-label">Username</label>
             <input name="username" type="text" class="form-control w-25" id="username" value="<% if (user != null) out.print(user.getUsername()); %>">
         </div>
         <div class="mb-2">
-            <label for="password" class="form-label">Password:</label>
-            <input name="password" type="text" class="form-control w-25" id="password" value="<% if (user != null) out.print(user.getPassword()); %>">
+            <label for="password" class="form-label">Password</label>
+            <input name="password" type="password" class="form-control w-25" id="password" value="<% if (user != null) out.print(user.getPassword()); %>">
         </div>
         <div class="mb-2">
-            <label for="email" class="form-label">Email:</label>
+            <label for="email" class="form-label">Email</label>
             <input name="email" type="text" class="form-control w-25" id="email" value="<% if (user != null) out.print(user.getEmail()); %>">
         </div>
         <div class="mb-3">
-            <label for="personal_name" class="form-label">Name:</label>
+            <label for="personal_name" class="form-label">Name</label>
             <input name="personal_name" type="text" class="form-control w-25" id="personal_name" value="<% if (user != null) out.print(user.getPersonalName()); %>">
         </div>
         <div class="mb-3">
-            <label for="address" class="form-label">Address:</label>
-            <input name="address" type="text" class="form-control w-25" id="address" value="<% if (user != null) out.print(user.getAddress()); %>">
+            <label for="user_address" class="form-label">Address</label>
+            <input name="user_address" type="text" class="form-control w-25" id="user_address" value="<% if (user != null) out.print(user.getAddress()); %>">
         </div>
         <div class="mb-3">
-        <label for="telephone" class="form-label">Telephone:</label>
-        <input name="telephone" type="text" class="form-control w-25" id="telephone" value="<% if (user != null) out.print(user.getTelephone()); %>">
-        </div>
-        <div class="mb-3">
-            <label for="role" class="form-label">Role:</label>
-            <input name="role" type="text" class="form-control w-25" id="role" value="<% if (user != null) out.print(user.getRole()); %>">
+        <label for="user_tlp" class="form-label">Telephone</label>
+        <input name="user_tlp" type="text" class="form-control w-25" id="user_tlp" value="<% if (user != null) out.print(user.getTelephone()); %>">
         </div>
 
 
         <input type="hidden" name="action" value="<% if (user != null) out.print("modify"); else out.print("register"); %>">
         <input type="hidden" name="userId" value="<% if (user != null) out.print(user.getUserID()); %>">
         <button type="submit" class="btn btn-primary"><%= textButton %></button>
-        <button type="button" onclick="window.location.href='index.jsp'" class="btn btn-danger">Volver</button>
+        <button type="button" onclick="window.location.href='index.jsp'" class="btn btn-danger">Back</button>
 
     </form>
     <div id="result"></div>
