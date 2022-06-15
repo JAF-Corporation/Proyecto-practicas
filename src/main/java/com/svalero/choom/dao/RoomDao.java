@@ -69,6 +69,8 @@ public class RoomDao {
         return rooms;
     }
 
+
+
     public Optional<Room> findById(int roomID) throws SQLException {
         String sql = "SELECT * FROM ROOM WHERE id_room = ?";
         Room room = null;
@@ -83,6 +85,8 @@ public class RoomDao {
 
         return Optional.ofNullable(room);
     }
+
+
 
     public void modify(int id, String type, float price, int totalRooms) throws SQLException {
         String sql = "UPDATE ROOM SET room_type = ?,  room_price = ?, total_rooms = ? WHERE id_room = ?";
@@ -114,7 +118,7 @@ public class RoomDao {
         room.setRoomID(resultSet.getInt("id_room"));
         room.setType(resultSet.getString("room_type"));
         room.setPrice(resultSet.getFloat("room_price"));
-        room.setPrice(resultSet.getInt("total_rooms"));
+        room.setTotalRooms(resultSet.getInt("total_rooms"));
 
         return room;
     }

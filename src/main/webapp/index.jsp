@@ -179,7 +179,7 @@
                                        </div>
                                      </div>
                                    </div>
-                                   <a href="#" class="btn btn-primary" target="_blank"><strong>View more</strong></a>
+                                   <a href="hotel.jsp?id=<%= hotel.getHotelID() %>" class="btn btn-primary" target="_blank"><strong>View more</strong></a>
                                  </div>
                      <%
                              }
