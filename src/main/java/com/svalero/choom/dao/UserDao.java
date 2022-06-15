@@ -151,4 +151,18 @@ public class UserDao {
         int rows = statement.executeUpdate();
         return rows == 1;
     }
+
+    public boolean delete(int userID) throws SQLException {
+        connection.setAutoCommit(false);
+
+        String sql = "DELETE FROM USERS WHERE id_user = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1,userID);
+        int rows = statement.executeUpdate();
+
+        connection.commit();
+        connection.setAutoCommit(true);
+
+        return rows == 1;
+    }
 }
