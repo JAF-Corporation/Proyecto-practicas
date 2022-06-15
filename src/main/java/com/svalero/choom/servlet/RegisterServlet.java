@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
                 //userDao.modify(userId, user);
                 out.println("<div class='alert alert-success' role='alert'>El usuario se ha modificado correctamente</div>");
             }
-        } catch (SQLException | UserAlreadyExistException sqle) {
+        } catch (SQLException sqle) {
             out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el articulo</div>");
             sqle.printStackTrace();
         } catch (UserAlreadyExistException uaee) {
