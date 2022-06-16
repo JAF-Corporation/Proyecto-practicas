@@ -151,7 +151,7 @@
                    </a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link" href="#">
+                   <a class="nav-link" href="user.jsp">
                      <span data-feather="shopping-cart" class="align-text-bottom"></span>
                      View profile
                    </a>

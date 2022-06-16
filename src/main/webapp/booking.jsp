@@ -46,6 +46,10 @@
     });
 </script>
 
+<%
+    int roomID = Integer.parseInt(request.getParameter("id"));
+%>
+
 <div class="container">
     <h2>Booking process</h2>
 
@@ -59,8 +63,8 @@
             <input name="checkoutDate" type="date" class="form-control w-25" id="checkoutDate">
         </div>
         <div style="margin-top: 10px;" class="mb-2">
-             <label for="noomRoom" class="form-label">Total rooms</label>
-             <input class="quantity" id="noomRoom" min="0" name="numRoom" value="1" type="number">
+             <label for="numRoom" class="form-label">Total rooms</label>
+             <input class="quantity" id="numRoom" min="0" name="numRoom" value="1" type="number">
         </div>
         <div class="btn-group">
             <select class="btn btn-primary dropdown-toggle" name="paymentMethod" id="paymentMethod">
@@ -73,6 +77,7 @@
         <div style="margin-top: 30px;" class="btn.group">
         <button type="submit" class="btn btn-primary">Confirm</button>
         </div>
+        <input type="hidden" name="roomID" value="<%= roomID %>">
     </form>
     <div id="result"></div>
 </div>
