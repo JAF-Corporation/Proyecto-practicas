@@ -112,6 +112,16 @@ public class BookingDao {
         return row == 1;
     }
 
+    public boolean deleteByRoomID(int id) throws SQLException {
+        String sql = "DELETE FROM BOOKING WHERE id_room = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        int row = statement.executeUpdate();
+
+        return row == 1;
+    }
+
 
     private Booking fromResultSet(ResultSet resultSet) throws SQLException{
         Booking booking = new Booking();

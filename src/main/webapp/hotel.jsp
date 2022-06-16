@@ -26,23 +26,25 @@
 </head>
 <body>
     <%
-        String hotelId = request.getParameter("id");
+        String hotelID = request.getParameter("hotelID");
         Database database = new Database();
         HotelDao hotelDao = new HotelDao(database.getConnection());
         Hotel hotel = null;
         RoomDao roomDao = new RoomDao(database.getConnection());
-        ArrayList<Room> rooms = roomDao.findByHotelID(Integer.parseInt(hotelId));
+        ArrayList<Room> rooms = roomDao.findByHotelID(Integer.parseInt(hotelID));
         try {
-            Optional<Hotel> optionalEstablishment = hotelDao.findByHotelID(Integer.parseInt(hotelId));
+            Optional<Hotel> optionalEstablishment = hotelDao.findByHotelID(Integer.parseInt(hotelID));
             hotel = optionalEstablishment.get();
 
     %>
     <div style="justify-content: center" class="container">
-        <div class="card mb-3">
+        <div class="card mb-3" style="margin: 50px">
             <img src="img/hotels/<%= hotel.getName() %>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 300px">
-            <div class="card-body text-center">
-                <h5 class="card-title"><<%= hotel.getName() %></h5>
+            <div class="card-body">
                 <h6 class="card-title"><<%= hotel.getAddress() + " - " + hotel.getCity() %></h6>
+                <h5 class="card-title"><<%= hotel.getName() %></h5>
+            </div>
+            <div class="card-body text-center">
                 <table class="table">
                     <thead>
                     <tr>
@@ -63,18 +65,13 @@
                         <td><%= rooms.get(i).getType() %></td>
                         <td><%= rooms.get(i).getTotalRooms() %></td>
                         <td><%= rooms.get(i).getPrice()%>&euro;</td>
-                        <td><button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" style="text-decoration:none; color:white">Pay</button></td>
+                        <td><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" class="w-100 btn btn-primary btn-lg" style="text-decoration:none; color:white">Pay</a></td>
                     </tr>
 
                     <%
                         }
                     %>
 
-                    <div style="display: flex; justify-content: space-between;">
-                        <li class="list-group-item"><strong><%= rooms.get(i).getType() %></strong></li>
-                        <li class="list-group-item"><%= rooms.get(i).getTotalRooms() %></li>
-                        <li class="list-group-item"><%= rooms.get(i).getPrice() %>&euro;</li>
-                    </div>
 
                     </tbody>
                 </table>

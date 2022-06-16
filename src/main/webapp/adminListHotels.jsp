@@ -37,7 +37,7 @@
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
                 <a href="hotel.jsp?hotelID=<%= hotel.getHotelID() %>" class="link-success">Hotel info</a>
-                <a href="modifyHotel.jsp?hotelID=<%= hotel.getHotelID() %>" class="link-primary">Modify</a>
+                <a href="adminModifyHotel.jsp?hotelID=<%= hotel.getHotelID() %>" class="link-primary">Modify</a>
                 <a href="deleteHotel?hotelID=<%= hotel.getHotelID() %>" class="link-danger">Delete</a>
             </div>
         </div>

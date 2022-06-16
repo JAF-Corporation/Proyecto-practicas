@@ -67,16 +67,14 @@ public class HotelDao {
 
     // ELIMINAR POR ID
 
-    public boolean deleteHotelByID(int hotelID) throws SQLException{
-        connection.setAutoCommit(false);
+    public boolean deleteHotelByID(int hotelID) throws SQLException {
+        //RoomDao roomDao = new RoomDao(connection);
+        //roomDao.deleteByHotelID(hotelID);
 
-        String sql = "DELELTE FROM HOTEL WHERE id_hotel = ?";
+        String sql = "DELETE FROM HOTEL WHERE id_hotel = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1,hotelID);
+        statement.setInt(1, hotelID);
         int rows = statement.executeUpdate();
-
-        connection.commit();
-        connection.setAutoCommit(true);
 
         return rows == 1;
     }

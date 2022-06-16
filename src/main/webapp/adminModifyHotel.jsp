@@ -49,29 +49,25 @@
         <form>
             <div class="mb-2">
                 <label for="name" class="form-label">New name</label>
-                <input name="name" type="text" class="form-control w-25" id="name" value="<% hotel.getName(); %>">
+                <input name="name" type="text" class="form-control w-25" id="name" value="<%= hotel.getName() %>">
             </div>
             <div class="mb-2">
                 <label for="address" class="form-label">New address</label>
-                <input name="address" type="text" class="form-control w-25" id="address" value="<% hotel.getAddress(); %>">
+                <input name="address" type="text" class="form-control w-25" id="address" value="<%= hotel.getAddress() %>">
             </div>
             <div class="mb-2">
                 <label for="city" class="form-label">New city</label>
-                <input name="city" type="text" class="form-control w-25" id="city" value="<% hotel.getCity(); %>">
-            </div>
-            <div class="mb-2">
-                <label for="address" class="form-label">Address</label>
-                <input name="address" type="text" class="form-control w-25" id="address" value="<% hotel.getAddress(); %>">
+                <input name="city" type="text" class="form-control w-25" id="city" value="<%= hotel.getCity() %>">
             </div>
             <div class="mb-2">
                 <label for="rating" class="form-label">Rating</label>
-                <input name="rating" type="text" class="form-control w-25" id="rating" value="<% hotel.getRating(); %>">
+                <input name="rating" type="text" class="form-control w-25" id="rating" value="<%= hotel.getRating() %>">
             </div>
             <div class="mb-2">
                 <label for="hotelCategoryID" class="form-label">Category</label>
-                <input name="hotelCategoryID" type="text" class="form-control w-25" id="hotelCategoryID" value="<% hotel.getHotelCategoryID(); %>">
+                <input name="hotelCategoryID" type="text" class="form-control w-25" id="hotelCategoryID" value="<%= hotel.getHotelCategoryID() %>">
             </div>
-            <input type="hidden" name="hotelID" value="<% hotel.getHotelID(); %>">
+            <input type="hidden" name="hotelID" value="<%= hotel.getHotelID() %>">
             <button type="submit" class="btn btn-primary">Send</button>
         </form>
         <div id="result"></div>

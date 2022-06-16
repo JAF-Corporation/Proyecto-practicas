@@ -9,6 +9,11 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.svalero.choom.util.Utils" %>
+<%@ page import="com.svalero.choom.domain.User" %>
+
+       <%
+           User currentUser = (User) session.getAttribute("currentUser");
+       %>
 
        <html lang="en">
          <head>
@@ -135,6 +140,27 @@
                      View profile
                    </a>
                  </li>
+
+                   <%
+                       if ((currentUser != null) && currentUser.getRole().equals("admin")) {
+                   %>
+
+                   <li class="nav-item">
+                       <a class="nav-link" href="adminListusers.jsp">
+                           <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                           List users
+                       </a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="adminListHotels.jsp">
+                           <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                           List hotels
+                       </a>
+                   </li>
+
+                   <%
+                       }
+                   %>
                </ul>
              </div>
            </nav>
@@ -180,7 +206,7 @@
                                        </div>
                                      </div>
                                    </div>
-                                   <a href="hotel.jsp?id=<%= hotel.getHotelID() %>" class="btn btn-primary" target="_blank"><strong>View more</strong></a>
+                                   <a href="hotel.jsp?hotelID=<%= hotel.getHotelID() %>" class="btn btn-primary" target="_blank"><strong>View more</strong></a>
                                  </div>
                      <%
                              }

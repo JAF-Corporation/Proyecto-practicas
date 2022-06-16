@@ -30,6 +30,6 @@ public class Utils {
             }
         }
 
-        return "From " + String.valueOf(value) + " \u20AC";
+        return "From " + String.valueOf(value) + " &euro;";
     }
 }

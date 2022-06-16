@@ -30,6 +30,7 @@ public class deleteHotelServlet extends HttpServlet {
 
         Integer hotelID = Integer.parseInt(req.getParameter("hotelID"));
 
+        out.println("<p>" + hotelID + "</p>");
         Database database = new Database();
         HotelDao hotelDao = new HotelDao(database.getConnection());
 

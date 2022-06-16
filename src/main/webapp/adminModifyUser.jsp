@@ -50,23 +50,23 @@
       <form>
         <div class="mb-2">
           <label for="username" class="form-label">New username</label>
-          <input name="username" type="text" class="form-control w-25" id="username" value="<% user.getUsername(); %>">
+          <input name="username" type="text" class="form-control w-25" id="username" value="<% =user.getUsername() %>">
         </div>
         <div class="mb-2">
           <label for="password" class="form-label">New password</label>
-          <input name="password" type="password" class="form-control w-25" id="password" value="<% user.getPassword(); %>">
+          <input name="password" type="password" class="form-control w-25" id="password" value="<% =user.getPassword() %>">
         </div>
         <div class="mb-2">
           <label for="personalName" class="form-label">Personal name</label>
-          <input name="personalName" type="text" class="form-control w-25" id="personalName" value="<% user.getPersonalName(); %>">
+          <input name="personalName" type="text" class="form-control w-25" id="personalName" value="<% =user.getPersonalName() %>">
         </div>
         <div class="mb-2">
           <label for="address" class="form-label">Address</label>
-          <input name="address" type="text" class="form-control w-25" id="address" value="<% user.getAddress(); %>">
+          <input name="address" type="text" class="form-control w-25" id="address" value="<% =user.getAddress() %>">
         </div>
         <div class="mb-2">
           <label for="telephone" class="form-label">Telephone</label>
-          <input name="telephone" type="text" class="form-control w-25" id="telephone" value="<% user.getTelephone(); %>">
+          <input name="telephone" type="text" class="form-control w-25" id="telephone" value="<% =user.getTelephone() %>">
         </div>
         <div class="mb-2">
           <label for="email" class="form-label">Email</label>
