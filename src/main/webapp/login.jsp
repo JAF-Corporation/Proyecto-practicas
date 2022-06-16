@@ -41,19 +41,23 @@
 
     <main class="form-signin">
         <form style="margin: 20px" method="post" action="login">
-            <img class="mb-4" src="img/icon00.png" alt="" width="auto" height="57">
-            <h1 class="h3 mb-3 fw-normal">Please log in</h1>
-
-            <div class="form-floating">
-                <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
-                <label for="floatingInput">Username</label>
+            <img src="img/logo/logo.png" alt="..." style="width: 150px; margin: 30px">
+            <div class="card mb-3" style="width: 300px">
+                <img src="img/hotels/Concordia.jpg" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <h5 class="card-title" style="margin-top: 20px">LOG IN</h5>
+                    <div class="form-floating">
+                        <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
+                    <button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="/choom/register.jsp" style="text-decoration:none; color:white">Sign in</button>
+                </div>
             </div>
-            <div class="form-floating">
-                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
-            <button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="/choom/register.jsp" target="_blank" style="text-decoration:none; color:white">Sign in</button>
         </form>
         <div id="result"></div>
     </main>

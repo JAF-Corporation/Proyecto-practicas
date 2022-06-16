@@ -3,7 +3,6 @@ package com.svalero.choom.dao;
 import com.svalero.choom.domain.Hotel;
 import com.svalero.choom.exception.HotelAlreadyExistsException;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,7 +100,7 @@ public class HotelDao {
     public ArrayList<Hotel> findAllHotels() throws SQLException{
         ArrayList<Hotel> hotels = new ArrayList<>();
 
-        String sql = "SELECT * FROM HOTEL ORDER BY hotel_name";
+        String sql = "SELECT * FROM (SELECT Q.*, ROWNUM RO FROM (SELECT id_hotel, hotel_name, hotel_address, hotel_city, hotel_rating, id_category FROM HOTEL ORDER BY hotel_name) Q WHERE ROWNUM <= 5) WHERE RO >= 1";
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
 
@@ -131,6 +130,26 @@ public class HotelDao {
         connection.setAutoCommit(true);
 
         return rows == 1;
+    }
+
+    public Optional<Hotel> findHotelByRoomID(int hotelID) throws SQLException{
+        Hotel hotel = null;
+
+        String sql = "SELECT * FROM HOTEL WHERE id_hotel = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1,hotelID);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            hotel = new Hotel();
+            hotel.setHotelID(resultSet.getInt("id_hotel"));
+            hotel.setName(resultSet.getString("hotel_name"));
+            hotel.setAddress(resultSet.getString("hotel_address"));
+            hotel.setCity(resultSet.getString("hotel_city"));
+            hotel.setRating(resultSet.getFloat("hotel_rating"));
+        }
+
+        return Optional.ofNullable(hotel);
     }
 
     public Hotel fromResultSet(ResultSet resultSet) throws SQLException{

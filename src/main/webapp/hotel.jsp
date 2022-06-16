@@ -38,37 +38,38 @@
 
     %>
     <div style="justify-content: center" class="container">
-        <div class="card" style="width: 18rem;">
-            <img src="img/hotels/<%= hotel.getName() %>.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><%= hotel.getName() %></h5>
-                <p class="card-text"><%= hotel.getAddress() %></p>
-                <p class="card-text"><%= hotel.getCity() %></p>
-            </div>
-            <ul style="display: flex;" class="list-group list-group-flush">
+        <div class="card mb-3">
+            <img src="img/hotels/<%= hotel.getName() %>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 300px">
+            <div class="card-body text-center">
+                <h5 class="card-title"><<%= hotel.getName() %></h5>
+                <h6 class="card-title"><<%= hotel.getAddress() + " - " + hotel.getCity() %></h6>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Available rooms</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <div style="display: flex; justify-content: space-between;">
-                <li class="list-group-item"><strong>TYPE</strong></li>
-                <li class="list-group-item">AVAILABLE ROOMS</li>
-                <li class="list-group-item">PRICE</li>
-                </div>
+                    <%
+                        for(int i=0; i < rooms.size(); i++) {
+                    %>
 
-                <%
-                    for(int i=0; i < rooms.size(); i++) {
-                %>
+                    <tr>
+                        <th scope="row"></th>
+                        <td><%= rooms.get(i).getType() %></td>
+                        <td><%= rooms.get(i).getTotalRooms() %></td>
+                        <td><%= rooms.get(i).getPrice()%>&euro;</td>
+                        <td><button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" style="text-decoration:none; color:white">Pay</button></td>
+                    </tr>
 
-                <div style="display: flex; justify-content: space-between;">
-                   <li class="list-group-item"><strong><%= rooms.get(i).getType() %></strong></li>
-                <li class="list-group-item"><%= rooms.get(i).getTotalRooms() %></li>
-                <li class="list-group-item"><%= rooms.get(i).getPrice() %>&euro;</li>
-                </div>
 
-                <%
-                    }
-                %>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="btn btn-primary">Booking</a>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

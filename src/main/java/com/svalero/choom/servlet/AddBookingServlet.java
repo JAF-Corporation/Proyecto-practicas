@@ -3,6 +3,7 @@ package com.svalero.choom.servlet;
 import com.svalero.choom.dao.BookingDao;
 import com.svalero.choom.dao.Database;
 import com.svalero.choom.domain.Booking;
+import com.svalero.choom.domain.User;
 import com.svalero.choom.exception.BookingAlreadyExistException;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,21 +25,23 @@ public class AddBookingServlet extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
 
-        //TODO CONTROL DE USUARIOS
+        HttpSession session = req.getSession(true);
+        User currentUser = (User) session.getAttribute("currentUser");
 
-        Integer bookingID = Integer.parseInt(req.getParameter("bookingID"));
         LocalDate checkinDate = LocalDate.parse(req.getParameter("checkinDate"));
         LocalDate checkoutDate = LocalDate.parse(req.getParameter("checkoutDate"));
-        Integer numRoom = Integer.parseInt(req.getParameter("numRoom"));
-        String state = req.getParameter("state");
-        String paymentMethod = req.getParameter("paymentMehtod");
-        Booking booking = new Booking(bookingID,checkinDate,checkoutDate,numRoom,state,paymentMethod);
+        int numRoom = Integer.parseInt(req.getParameter("numRoom"));
+        String paymentMethod = req.getParameter("paymentMethod");
+        int roomID = Integer.parseInt(req.getParameter("id"));
+        int userID = currentUser.getUserID();
+        
+        Booking booking = new Booking(checkinDate,checkoutDate,numRoom,paymentMethod);
 
         Database database = new Database();
         BookingDao bookingDao = new BookingDao(database.getConnection());
 
         try{
-            bookingDao.add(booking);
+            bookingDao.add(booking, userID, roomID);
             out.println("<div class='alert alert-success' role='alert'>\n" +
                     "  <h4 class='alert-heading'>Success booking</h4>\n" +
                     "  <p>The booking was made succesfully</p>\n" +
