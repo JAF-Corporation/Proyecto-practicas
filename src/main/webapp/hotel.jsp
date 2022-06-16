@@ -66,7 +66,15 @@
                         <td><button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" style="text-decoration:none; color:white">Pay</button></td>
                     </tr>
 
+                    <%
+                        }
+                    %>
 
+                    <div style="display: flex; justify-content: space-between;">
+                        <li class="list-group-item"><strong><%= rooms.get(i).getType() %></strong></li>
+                        <li class="list-group-item"><%= rooms.get(i).getTotalRooms() %></li>
+                        <li class="list-group-item"><%= rooms.get(i).getPrice() %>&euro;</li>
+                    </div>
 
                     </tbody>
                 </table>
