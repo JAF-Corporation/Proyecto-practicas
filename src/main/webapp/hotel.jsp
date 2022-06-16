@@ -66,9 +66,7 @@
                         <td><button type="button" class="w-100 btn btn-primary btn-lg" style="margin-top: 10px"><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" style="text-decoration:none; color:white">Pay</button></td>
                     </tr>
 
-                    <%
-                        }
-                    %>
+
 
                     </tbody>
                 </table>
