@@ -119,7 +119,7 @@
          </button>
          <form>
              <div style="display: flex">
-                 <input style="width: auto" class="form-control form-control-dark w-100 rounded-0 border-0" type="text"  aria-label="Search">
+                 <input style="width: auto" class="form-control form-control-dark w-100 rounded-0 border-0" type="text" name="searchText" id="searchText" aria-label="Search your hotel">
                  <button style="justify-content: right" type="submit" class="btn btn-primary">Search</button>
              </div>
          </form>
