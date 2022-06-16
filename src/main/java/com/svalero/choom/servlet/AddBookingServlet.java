@@ -30,9 +30,9 @@ public class AddBookingServlet extends HttpServlet {
 
         LocalDate checkinDate = LocalDate.parse(req.getParameter("checkinDate"));
         LocalDate checkoutDate = LocalDate.parse(req.getParameter("checkoutDate"));
-        int numRoom = Integer.parseInt(req.getParameter("numRoom"));
         String paymentMethod = req.getParameter("paymentMethod");
-        int roomID = Integer.parseInt(req.getParameter("id"));
+        int numRoom = Integer.parseInt(req.getParameter("numRoom"));
+        int roomID = Integer.parseInt(req.getParameter("roomID"));
         int userID = currentUser.getUserID();
         
         Booking booking = new Booking(checkinDate,checkoutDate,numRoom,paymentMethod);
