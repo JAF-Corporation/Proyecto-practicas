@@ -30,8 +30,8 @@
       </script>
 
       <div class="container">
-        <h1> Usuario </h1>
-        <h2>Zona de usuario</h2>
+        <h1> User </h1>
+        <h2>View Profile</h2>
         <form>
           <div class="mb-2">
             <label for="username" class="form-label">Username</label>
