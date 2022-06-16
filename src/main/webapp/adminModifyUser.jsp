@@ -11,8 +11,6 @@
     response.sendRedirect("roleDenied.jsp");
   }
 
-
-
   int userID = Integer.parseInt(request.getParameter("userID"));
   User user = null;
 
@@ -23,7 +21,7 @@
     Optional<User> optionalUser = userDao.findById(userID);
     user = optionalUser.get();
   } catch(SQLException sqle) {
-    out.print("ERROR: Can not connect with database");
+    out.print("ERROR: Can not connect to database");
     sqle.printStackTrace();
   }
 %>
