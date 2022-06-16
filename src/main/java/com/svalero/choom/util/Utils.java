@@ -18,7 +18,10 @@ public class Utils {
         return value;
     }
 
-    public static float getSmallPrice(ArrayList<Room> rooms) {
+    public static String getSmallPrice(ArrayList<Room> rooms) {
+        if (rooms.size() == 0)
+            return "Agotado";
+
         float value = rooms.get(0).getPrice();
 
         for (int i = 0; i < rooms.size(); i++) {
@@ -27,6 +30,6 @@ public class Utils {
             }
         }
 
-        return value;
+        return "From " + String.valueOf(value) + " \u20AC";
     }
 }

@@ -149,13 +149,13 @@
                          Database database = new Database();
                          HotelDao hotelDao = new HotelDao(database.getConnection());
                          CategoryDao categoryDao = new CategoryDao(database.getConnection());
-                         //RoomDao roomDao = new RoomDao(database.getConnection());
+                         RoomDao roomDao = new RoomDao(database.getConnection());
 
                          try {
                              List<Hotel> hotels = hotelDao.findAllHotels();
                              for (Hotel hotel : hotels) {
                      %>
-                                 <div class="card mb-3" style="max-width: 540px;">
+                                 <div class="card mb-3" style="max-width: 640px;">
                                    <div class="row g-0">
                                      <div class="col-md-4">
                                        <img src="img/hotels/<%= hotel.getName() %>.jpg" class="img-fluid rounded-start" alt="...">
@@ -176,6 +176,7 @@
                                           %>
                                          </div>
                                          <h6 style="display: flex; justify-content:right;" class="card-title"><%= hotel.getRating() %>/10</h6>
+                                           <h5 class="card-title"><%= Utils.getSmallPrice(roomDao.findByHotelID(hotel.getHotelID()))%></h5>
                                        </div>
                                      </div>
                                    </div>
