@@ -34,11 +34,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("currentUser", user.get());
                 response.sendRedirect("index.jsp");
             } else {
-                out.println("<div class='alert alert-danger' role='alert'>Nombre de usuario y/o contraseña incorrectos</div>");
+                out.println("<div class='alert alert-danger' role='alert'>ERROR: Wrong password or username</div>");
             }
 
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Nombre de usuario y/o contraseña incorrectos</div>");
+            out.println("<div class='alert alert-danger' role='alert'>ERROR: Can not connect to database</div>");
             sqle.printStackTrace();
         }
     }
