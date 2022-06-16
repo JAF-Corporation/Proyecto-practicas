@@ -11,6 +11,14 @@ public class Hotel {
     public Hotel() {
     }
 
+    public Hotel(String name, String address, String city, float rating, int hotelCategoryID) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.rating = rating;
+        this.hotelCategoryID = hotelCategoryID;
+    }
+
     public Hotel(int hotelID, String name, String address, String city, float rating) {
         this.hotelID = hotelID;
         this.name = name;
