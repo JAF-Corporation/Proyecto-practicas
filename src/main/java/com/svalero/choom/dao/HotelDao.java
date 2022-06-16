@@ -68,8 +68,6 @@ public class HotelDao {
     // ELIMINAR POR ID
 
     public boolean deleteHotelByID(int hotelID) throws SQLException {
-        //RoomDao roomDao = new RoomDao(connection);
-        //roomDao.deleteByHotelID(hotelID);
 
         String sql = "DELETE FROM HOTEL WHERE id_hotel = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
@@ -91,6 +89,7 @@ public class HotelDao {
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()){
             Hotel hotel = fromResultSet(resultSet);
+            hotels.add(hotel);
         }
         return hotels;
     }

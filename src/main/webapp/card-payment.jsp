@@ -34,37 +34,45 @@
 
 </head>
 <body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("form").on("submit", function(event) {
+            event.preventDefault();
+            var formValue = $(this).serialize();
+            $.post("pay", formValue, function(data) {
+                $("#result").html(data);
+            });
+        });
+    });
+</script>
 
 <%
-    String roomID = request.getParameter("id");
+    int bookingID = Integer.parseInt(request.getParameter("bookingID"));
 %>
 
-<div class="container">
+<div style="margin: 50px; justify-content: center" class="container">
     <h2>Booking process</h2>
 
-    <form method="post" action="booking">
+    <form method="post" action="pay">
         <div class="mb-2">
-            <label for="checkinDate" class="form-label">Checkin</label>
-            <input name="checkinDate" type="date" class="form-control w-25" id="checkinDate">
+            <label for="checkinDate" class="form-label">Property Name</label>
+            <input name="checkinDate" type="text" class="form-control w-25" id="checkinDate">
         </div>
         <div class="mb-2">
-            <label for="checkoutDate" class="form-label">Checkout</label>
+            <label for="checkinDate" class="form-label">Card Number</label>
+            <input name="cardNumber" type="text" class="form-control w-25" id="cardNumber">
+        </div>
+        <div class="mb-2">
+            <label for="checkoutDate" class="form-label">Date Expiry</label>
             <input name="checkoutDate" type="date" class="form-control w-25" id="checkoutDate">
         </div>
         <div style="margin-top: 10px;" class="mb-2">
-            <label for="noomRoom" class="form-label">Total rooms</label>
-            <input class="quantity" id="noomRoom" min="0" name="numRoom" value="1" type="number">
-        </div>
-        <div class="btn-group">
-            <select class="btn btn-primary dropdown-toggle" name="paymentMethod" id="paymentMethod">
-                <option value="mastercard">Master Card</option>
-                <option value="creditcard">Credit Card</option>
-                <option value="debitcard">Debit Card</option>
-                <option value="paypal">PayPal</option>
-            </select>
+            <label for="noomRoom" class="form-label">CVV</label>
+            <input class="text" id="noomRoom" name="numRoom"type="text">
         </div>
         <div style="margin-top: 30px;" class="btn.group">
-            <button type="submit" class="btn btn-primary"><a href="login.jsp?id=<%= Integer.parseInt(roomID) %>" class="btn btn-primary" target="_blank"><strong>Confirm</strong></a></button>
+            <input type="hidden" name="bookingID" value="<%= bookingID %>">
+            <button type="submit" class="btn btn-primary"><strong>Confirm payment</strong></button>
         </div>
     </form>
     <div id="result"></div>

@@ -10,6 +10,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.svalero.choom.util.Utils" %>
 <%@ page import="com.svalero.choom.domain.User" %>
+       <%@ page import="java.util.ArrayList" %>
 
        <%
            User currentUser = (User) session.getAttribute("currentUser");
@@ -117,7 +118,7 @@
          <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
-         <form>
+         <form method="get" action="index.jsp">
              <div style="display: flex">
                  <input style="width: auto" class="form-control form-control-dark w-100 rounded-0 border-0" type="text" name="searchText" id="searchText" aria-label="Search your hotel">
                  <button style="justify-content: right" type="submit" class="btn btn-primary">Search</button>
@@ -136,7 +137,7 @@
        <div class="container-fluid">
          <div class="row">
            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-             <div class="position-sticky pt-3">
+             <div style="margin-top: 20px" class="position-sticky pt-3">
                <ul class="nav flex-column">
                  <li class="nav-item">
                    <a class="nav-link active" aria-current="page" href="#">
@@ -182,19 +183,29 @@
            </nav>
          </div>
        </div>
+       <div id="result"></div>
 
        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
          <div style="margin: 10px; justify-content: center;" class="container">
                  <h2 style="margin: 10px; justify-content: center;">HOTELS</h2>
                  <ul class="list-group">
                      <%
+                         String searchText = request.getParameter("searchText");
                          Database database = new Database();
                          HotelDao hotelDao = new HotelDao(database.getConnection());
                          CategoryDao categoryDao = new CategoryDao(database.getConnection());
                          RoomDao roomDao = new RoomDao(database.getConnection());
 
+
                          try {
-                             List<Hotel> hotels = hotelDao.findAllHotels();
+                             List<Hotel> hotels = new ArrayList<>();
+
+                             if(searchText == null || searchText.equals("")) {
+                                 hotels = hotelDao.findAllHotels();
+                             } else {
+                                 hotels = hotelDao.findAllHotelsByText(searchText);
+                             }
+
                              for (Hotel hotel : hotels) {
                      %>
                                  <div class="card mb-3" style="max-width: 640px;">

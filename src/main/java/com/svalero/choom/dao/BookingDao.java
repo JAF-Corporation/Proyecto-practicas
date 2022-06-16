@@ -89,7 +89,6 @@ public class BookingDao {
 
     public void modify(int id, LocalDate checkinDate, LocalDate checkoutDate, int roomNumber, String state, String paymentMethod) throws SQLException {
         String sql = "UPDATE BOOKING SET in_date = ?, out_date = ?, room_number = ?, pay_state = ?, pay_method = ? WHERE id_booking = ?";
-        BookingDao boockingDao = new BookingDao(connection);
 
         PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -99,6 +98,17 @@ public class BookingDao {
         statement.setString(4, state);
         statement.setString(5, paymentMethod);
         statement.setInt(6, id);
+        statement.executeUpdate();
+    }
+
+    public void modifyState(int id) throws SQLException {
+        String sql = "UPDATE BOOKING SET pay_state = ? WHERE id_booking = ?";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setString(1, "Pagado");
+        statement.setInt(2, id);
+
         statement.executeUpdate();
     }
 

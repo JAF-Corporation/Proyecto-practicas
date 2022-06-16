@@ -39,8 +39,8 @@
     %>
     <div style="justify-content: center" class="container">
         <div class="card mb-3" style="margin: 50px">
-            <img src="img/hotels/<%= hotel.getName() %>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 300px">
-            <div class="card-body">
+            <div class="card-body" style="display: flex">
+                <img src="img/hotels/<%= hotel.getName() %>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 300px">
                 <h6 class="card-title"><<%= hotel.getAddress() + " - " + hotel.getCity() %></h6>
                 <h5 class="card-title"><<%= hotel.getName() %></h5>
             </div>
@@ -65,7 +65,7 @@
                         <td><%= rooms.get(i).getType() %></td>
                         <td><%= rooms.get(i).getTotalRooms() %></td>
                         <td><%= rooms.get(i).getPrice()%>&euro;</td>
-                        <td><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" class="w-100 btn btn-primary btn-lg" style="text-decoration:none; color:white">Pay</a></td>
+                        <td><a href="booking.jsp?id=<%=rooms.get(i).getRoomID()%>" class="w-100 btn btn-primary btn-lg" style="text-decoration:none; color:white">Booking</a></td>
                     </tr>
 
                     <%

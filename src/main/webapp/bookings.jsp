@@ -38,7 +38,13 @@
 <%
     Database database = new Database();
     BookingDao bookingDao = new BookingDao(database.getConnection());
-    ArrayList<Booking> bookings = bookingDao.findByUserID(currentUser.getUserID());
+    ArrayList<Booking> bookings = new ArrayList<>();
+    if (currentUser.getRole().equals("user")) {
+        bookings = bookingDao.findByUserID(currentUser.getUserID());
+    }
+    else {
+        bookings = bookingDao.findAll();
+    }
     RoomDao roomDao = new RoomDao(database.getConnection());
     HotelDao hotelDao = new HotelDao(database.getConnection());
 %>
@@ -47,33 +53,69 @@
     <%
         if(currentUser.getRole().equals("user")) {
     %>
-    <h2>My Bookings</h2>
+    <h2 class="text-center" style="margin: 50px">MY BOOKINGS</h2>
     <%
         } else {
     %>
-        <h2>All Bookings</h2>
+    <h2 class="text-center" style="margin: 50px">ALL BOOKINGS</h2>
     <%
         }
     %>
 
-    <div style="justify-content: center" class="container">
+    <div style="justify-content: center;" class="container">
         <%
             for(int i = 0; i < bookings.size(); i++) {
+
+                Room room = roomDao.findById(bookings.get(i).getRoomID()).get();
+                Hotel hotel = hotelDao.findByHotelID(room.getHotelID()).get();
+
         %>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><%= bookings.get(i).getCheckinDate() %></h5>
-                <h5 class="card-title"><%= bookings.get(i).getCheckoutDate() %></h5>
-                <p class="card-text"><%= bookings.get(i).getNumRoom() %></p>
-                <p class="card-text"><%= bookings.get(i).getPaymentMethod() %></p>
-                <%
-                    if(bookings.get(i).getState().equals("Pendiente")) {
-                %>
-                <a href="#" class="btn btn-primary" target="_blank"><strong>Pay</strong></a>
-                <%
-                    }
-                %>
+        <div class="card" style="width: auto;  margin: 20px">
+            <img src="img/hotels/<%= hotel.getName()%>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 20%">
+            <div class="card-body text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Checkin</th>
+                        <th scope="col">Checkout</th>
+                        <th scope="col">Rooms</th>
+                        <th scope="col">Payment Method</th>
+                        <th scope="col">State</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td><%= bookings.get(i).getCheckinDate() %></td>
+                        <td><%= bookings.get(i).getCheckoutDate() %></td>
+                        <td><%= bookings.get(i).getNumRoom()%></td>
+                        <td><%= bookings.get(i).getPaymentMethod()%></td>
+                        <%
+                            if (bookings.get(i).getState().equals("Pendiente")) {
+                        %>
+                        <td>PENDIENTE</td>
+                        <%
+                            } else {
+                        %>
+                        <td>PAGADO</td
+                        <%
+                            }
+                        %>
+
+                        <%
+                            if(currentUser.getRole().equals("user") && bookings.get(i).getState().equals("Pendiente")) {
+                        %>
+                        <td><a href="card-payment.jsp?bookingID=<%= bookings.get(i).getBookingID() %>" class="w-100 btn btn-primary btn-lg" style="text-decoration:none; color:white">Pay</a></td>
+                        <%
+                        } else if (currentUser.getRole().equals("admin")) {
+                        %>
+                        <td><a href="#" class="w-100 btn btn-warning btn-lg" style="text-decoration:none; color:white">Modify</a></td>
+                        <%
+                            }
+                        %>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <%
