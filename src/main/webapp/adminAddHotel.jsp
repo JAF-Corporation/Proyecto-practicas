@@ -50,8 +50,8 @@
             <input name="rating" type="text" class="form-control w-25" id="rating" value="">
         </div>
         <div class="mb-2">
-            <label for="hotelCategoryID" class="form-label">Rating</label>
-            <input name="hotelCategoryID" type="text" class="form-control w-25" id="hotelCategoryID" value="">
+            <label for="categoryID" class="form-label">Stars</label>
+            <input name="categoryID" type="text" class="form-control w-25" id="categoryID" value="">
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
