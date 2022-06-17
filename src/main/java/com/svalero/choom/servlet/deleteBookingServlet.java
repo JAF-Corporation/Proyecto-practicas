@@ -1,7 +1,7 @@
 package com.svalero.choom.servlet;
 
+import com.svalero.choom.dao.BookingDao;
 import com.svalero.choom.dao.Database;
-import com.svalero.choom.dao.HotelDao;
 import com.svalero.choom.domain.User;
 
 import javax.servlet.ServletException;
@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/deleteHotel")
-public class deleteHotelServlet extends HttpServlet {
+@WebServlet("/deleteBooking")
+public class deleteBookingServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,16 +28,16 @@ public class deleteHotelServlet extends HttpServlet {
             resp.sendRedirect("roleDenied.jsp");
         }
 
-        Integer hotelID = Integer.parseInt(req.getParameter("hotelID"));
+        int bookingID = Integer.parseInt(req.getParameter("bookingID"));
 
         Database database = new Database();
-        HotelDao hotelDao = new HotelDao(database.getConnection());
+        BookingDao bookingDao = new BookingDao(database.getConnection());
 
         try{
-            hotelDao.deleteHotelByID(hotelID);
+            bookingDao.delete(bookingID);
             out.println("<div class='alert alert-success' role='alert'>\n" +
-                    "  <h4 class='alert-heading'>HOTEL DELETED</h4>\n" +
-                    "  <p>Hotel was deleted successfully</p>\n" +
+                    "  <h4 class='alert-heading'>BOOKING DELETED</h4>\n" +
+                    "  <p>Booking was deleted successfully</p>\n" +
                     "  <hr>\n" +
                     "  <p class='mb-0'><a href='/choom/index.jsp'>Go to menu</a></p>\n" +
                     "</div>");

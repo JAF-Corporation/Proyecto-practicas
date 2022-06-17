@@ -23,10 +23,11 @@
            <meta name="description" content="">
            <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
            <meta name="generator" content="Hugo 0.98.0">
-           <title>Dashboard Template · Bootstrap v5.2</title>
+           <title>Choom </title>
 
        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
 
        <meta name="theme-color" content="#7952b3">
 
@@ -44,6 +45,7 @@
 
 
            <style>
+
              .bd-placeholder-img {
                font-size: 1.125rem;
                text-anchor: middle;
@@ -169,6 +171,12 @@
                        </a>
                    </li>
                    <li class="nav-item">
+                       <a class="nav-link" href="adminAddHotel.jsp">
+                           <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                           Add hotel
+                       </a>
+                   </li>
+                   <li class="nav-item">
                        <a class="nav-link" href="adminListHotels.jsp">
                            <span data-feather="shopping-cart" class="align-text-bottom"></span>
                            List hotels
@@ -208,7 +216,7 @@
 
                              for (Hotel hotel : hotels) {
                      %>
-                                 <div class="card mb-3" style="max-width: 640px;">
+                                 <div class="card mb-3 article-loop" style="max-width: 640px;">
                                    <div class="row g-0">
                                      <div class="col-md-4">
                                        <img src="img/hotels/<%= hotel.getName() %>.jpg" class="img-fluid rounded-start" alt="...">
@@ -247,7 +255,6 @@
                  </ul>
          </div>
        </main>
-
        <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
     </body>
