@@ -1,6 +1,15 @@
 # PROYECTO SEMANA PRESENCIAL
 # CHOOM
 
+Equipo formado por:
+
+1. Fernando Campos
+2. Javier Vizcaino
+3. Adrián Carnicer
+
+
+Dirección Trello: https://trello.com/b/WSIR3WLz/proyecto-jaf-corp
+
 ###COMPLETO
 
 1. Listar Hoteles, usuarios y reservas
