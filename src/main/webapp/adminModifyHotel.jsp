@@ -4,6 +4,7 @@
 <%@ page import="com.svalero.choom.dao.HotelDao" %>
 <%@ page import="java.util.Optional" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="com.svalero.choom.dao.CategoryDao" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 
 <%

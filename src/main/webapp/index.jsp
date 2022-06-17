@@ -130,9 +130,6 @@
            <div class="nav-item text-nowrap">
              <a class="nav-link px-3" href="login.jsp">Log in</a>
            </div>
-           <div class="nav-item text-nowrap">
-             <a class="nav-link px-3" href="#">Log out</a>
-           </div>
          </div>
        </header>
 

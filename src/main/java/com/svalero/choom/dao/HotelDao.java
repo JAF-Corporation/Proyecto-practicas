@@ -130,20 +130,18 @@ public class HotelDao {
     //MODIFICAR HOTEL POR ID
 
     public boolean modifyHotelByID(Hotel hotel, int hotelID) throws SQLException {
-        connection.setAutoCommit(false);
 
         String sql = "UPDATE HOTEL SET hotel_name = ?, hotel_address = ?, hotel_city = ?, hotel_rating = ?, id_category = ? WHERE hotel_id = ?";
+
         PreparedStatement statement = connection.prepareStatement(sql);
+
         statement.setString(1, hotel.getName());
         statement.setString(2,hotel.getAddress());
         statement.setString(3,hotel.getCity());
         statement.setFloat(4,hotel.getRating());
         statement.setInt(5,hotel.getHotelCategoryID());
-        statement.setInt(6,hotel.getHotelID());
+        statement.setInt(6,hotelID);
         int rows = statement.executeUpdate();
-
-        connection.commit();
-        connection.setAutoCommit(true);
 
         return rows == 1;
     }

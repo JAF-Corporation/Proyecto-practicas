@@ -112,11 +112,11 @@
                             <%
                                 if (bookings.get(i).getState().equals("Pendiente")) {
                             %>
-                            <td>PENDIENTE</td>
+                            <td>Unpaid</td>
                             <%
                             } else {
                             %>
-                            <td>PAGADO</td
+                            <td>Paid</td
                             <%
                                 }
                             %>

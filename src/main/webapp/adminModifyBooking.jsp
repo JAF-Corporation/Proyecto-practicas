@@ -59,13 +59,13 @@
             <label for="numRoom" class="form-label">Total rooms</label>
             <input class="quantity" id="numRoom" min="0" name="numRoom" value="<%= booking.getNumRoom()%>" type="number">
         </div>
-        <div class="btn-group">
+        <div class="mb-2">
             <select class="btn btn-primary dropdown-toggle" name="state" id="state" >
-                <option value="pendiente">Pending</option>
-                <option value="pagado">Payd</option>
+                <option value="pendiente">Unpaid</option>
+                <option value="pagado">Paid</option>
             </select>
         </div>
-        <div class="btn-group">
+        <div class="mb-2">
             <select class="btn btn-primary dropdown-toggle" name="paymentMethod" id="paymentMethod" >
                 <option value="mastercard">Master Card</option>
                 <option value="creditcard">Credit Card</option>

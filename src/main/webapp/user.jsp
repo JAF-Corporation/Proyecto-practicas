@@ -6,7 +6,7 @@
 <%
   User currentUser = (User) session.getAttribute("currentUser");
   if (currentUser == null) {
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("login.jsp");
   }
 
 %>

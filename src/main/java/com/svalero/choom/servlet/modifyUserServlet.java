@@ -26,7 +26,7 @@ public class modifyUserServlet extends HttpServlet {
             resp.sendRedirect("roleDenied.jsp");
         }
 
-        Integer userID = Integer.parseInt(req.getParameter("userID"));
+        Integer userID = Integer.parseInt(req.getParameter("idUser"));
         String personalName = req.getParameter("personalName");
         String username = req.getParameter("username");
         String password = req.getParameter("password");

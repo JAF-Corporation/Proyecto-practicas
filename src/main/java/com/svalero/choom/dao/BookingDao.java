@@ -106,7 +106,7 @@ public class BookingDao {
 
         PreparedStatement statement = connection.prepareStatement(sql);
 
-        statement.setString(1, "Pagado");
+        statement.setString(1, "Paid");
         statement.setInt(2, id);
 
         statement.executeUpdate();
