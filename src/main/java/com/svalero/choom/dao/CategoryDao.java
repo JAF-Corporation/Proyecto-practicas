@@ -1,13 +1,11 @@
 package com.svalero.choom.dao;
 
 import com.svalero.choom.domain.Category;
-import com.svalero.choom.domain.Room;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class CategoryDao {
 
@@ -36,6 +34,8 @@ public class CategoryDao {
         Category category = new Category();
 
         category.setStars(resultSet.getInt("category_stars"));
+
         return category;
     }
+
 }

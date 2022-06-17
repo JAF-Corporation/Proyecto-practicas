@@ -47,6 +47,7 @@
     }
     RoomDao roomDao = new RoomDao(database.getConnection());
     HotelDao hotelDao = new HotelDao(database.getConnection());
+    CategoryDao categoryDao = new CategoryDao(database.getConnection());
 %>
 
 <div class="container">
@@ -69,53 +70,73 @@
                 Room room = roomDao.findById(bookings.get(i).getRoomID()).get();
                 Hotel hotel = hotelDao.findByHotelID(room.getHotelID()).get();
 
+
         %>
         <div class="card" style="width: auto;  margin: 20px">
-            <img src="img/hotels/<%= hotel.getName()%>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 20%">
-            <div class="card-body text-center">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Checkin</th>
-                        <th scope="col">Checkout</th>
-                        <th scope="col">Rooms</th>
-                        <th scope="col">Payment Method</th>
-                        <th scope="col">State</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+            <div class="card mb-3" style="margin: 50px">
+                <div class="card-body" style="display: flex">
+                    <img src="img/hotels/<%= hotel.getName() %>.jpg" class="card-img-top justify-content-center text-center" alt="..." style="width: 300px">
+                    <div class="container">
+                        <h2 class="card-title" style="margin-top: 20px"><%= hotel.getName() %></h2>
+                        <h4 class="card-title" style="margin-top: 20px"><%= hotel.getAddress() + " - " + hotel.getCity() %></h4>
+                        <div style="display: flex; margin-top: 20px">
+                            <%
+                                for(int j = 0; j < categoryDao.findStarsById(hotel.getHotelCategoryID()); j++) {
+                            %>
+                            <img style="width: 2%; height: 2%;" src="img/icons/black-star.png"></p>
+                            <%
+                                }
+                            %>
+                        </div>
+                        <h4 class="card-title" style="margin-top: 20px"><%= hotel.getRating() %>/10</h4>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Checkin</th>
+                            <th scope="col">Checkout</th>
+                            <th scope="col">Rooms</th>
+                            <th scope="col">Payment Method</th>
+                            <th scope="col">State</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-                    <tr>
-                        <td><%= bookings.get(i).getCheckinDate() %></td>
-                        <td><%= bookings.get(i).getCheckoutDate() %></td>
-                        <td><%= bookings.get(i).getNumRoom()%></td>
-                        <td><%= bookings.get(i).getPaymentMethod()%></td>
-                        <%
-                            if (bookings.get(i).getState().equals("Pendiente")) {
-                        %>
-                        <td>PENDIENTE</td>
-                        <%
+                        <tr>
+                            <td><%= bookings.get(i).getCheckinDate() %></td>
+                            <td><%= bookings.get(i).getCheckoutDate() %></td>
+                            <td><%= bookings.get(i).getNumRoom()%></td>
+                            <td><%= bookings.get(i).getPaymentMethod()%></td>
+                            <%
+                                if (bookings.get(i).getState().equals("Pendiente")) {
+                            %>
+                            <td>PENDIENTE</td>
+                            <%
                             } else {
-                        %>
-                        <td>PAGADO</td
-                        <%
-                            }
-                        %>
+                            %>
+                            <td>PAGADO</td
+                            <%
+                                }
+                            %>
 
-                        <%
-                            if(currentUser.getRole().equals("user") && bookings.get(i).getState().equals("Pendiente")) {
-                        %>
-                        <td><a href="card-payment.jsp?bookingID=<%= bookings.get(i).getBookingID() %>" class="w-100 btn btn-primary btn-lg" style="text-decoration:none; color:white">Pay</a></td>
-                        <%
-                        } else if (currentUser.getRole().equals("admin")) {
-                        %>
-                        <td><a href="#" class="w-100 btn btn-warning btn-lg" style="text-decoration:none; color:white">Modify</a></td>
-                        <%
-                            }
-                        %>
-                    </tr>
-                    </tbody>
-                </table>
+                            <%
+                                if(currentUser.getRole().equals("user") && bookings.get(i).getState().equals("Pendiente")) {
+                            %>
+                            <td><a href="card-payment.jsp?bookingID=<%= bookings.get(i).getBookingID() %>" class="w-100 btn btn-primary btn-lg" style="text-decoration:none; color:white">Pay</a></td>
+                            <%
+                            } else if (currentUser.getRole().equals("admin")) {
+                            %>
+                            <td><a href="adminModifyBooking.jsp?bookingID=<%= bookings.get(i).getBookingID() %>" class="w-100 btn btn-warning btn-lg" style="text-decoration:none; color:white">Modify</a></td>
+                            <td><a href="deleteBooking?bookingID=<%= bookings.get(i).getBookingID() %>" class="w-100 btn btn-danger btn-lg" style="text-decoration:none; color:white">Delete</a></td>
+                            <%
+                                }
+                            %>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <%
@@ -125,5 +146,9 @@
 
 
 </div>
+
+<script>
+    $('.article-loop').paginate(5);
+</script>
 </body>
 </html>

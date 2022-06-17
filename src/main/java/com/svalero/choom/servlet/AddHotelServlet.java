@@ -1,5 +1,6 @@
 package com.svalero.choom.servlet;
 
+import com.svalero.choom.dao.CategoryDao;
 import com.svalero.choom.dao.Database;
 import com.svalero.choom.dao.HotelDao;
 import com.svalero.choom.domain.Hotel;
@@ -28,15 +29,17 @@ public class AddHotelServlet extends HttpServlet {
             resp.sendRedirect("roleDenied.jsp");
         }
 
+        Database database = new Database();
+        HotelDao hotelDao = new HotelDao(database.getConnection());
+        CategoryDao categoryDao = new CategoryDao(database.getConnection());
+
         String name = req.getParameter("name");
         String address = req.getParameter("address");
         String city = req.getParameter("city");
         Float rating = Float.parseFloat(req.getParameter("rating"));
-        Integer hotelCategoryID = Integer.parseInt(req.getParameter("hotelCategoryID"));
-        Hotel hotel = new Hotel(name,address,city,rating,hotelCategoryID);
+        Integer categoryID = Integer.parseInt(req.getParameter("categoryID"))+299;
 
-        Database database = new Database();
-        HotelDao hotelDao = new HotelDao(database.getConnection());
+        Hotel hotel = new Hotel(name,address,city,rating,categoryID);
 
         try {
             hotelDao.addHotel(hotel);

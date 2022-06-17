@@ -2,6 +2,7 @@ package com.svalero.choom.dao;
 
 import com.svalero.choom.domain.Hotel;
 import com.svalero.choom.exception.HotelAlreadyExistsException;
+import com.svalero.choom.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,17 +26,15 @@ public class HotelDao {
             throw new HotelAlreadyExistsException();
         }
 
-        connection.setAutoCommit(false);
 
-        String sql = "INSERT INTO HOTEL (hotel_name, hotel_address, hotel_city, hotel_rating) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO HOTEL (hotel_name, hotel_address, hotel_city, hotel_rating, id_category) VALUES (?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1,hotel.getName());
         statement.setString(2,hotel.getAddress());
         statement.setString(3,hotel.getCity());
         statement.setFloat(4,hotel.getRating());
-
-        connection.commit();
-        connection.setAutoCommit(true);
+        statement.setInt(5,hotel.getHotelCategoryID());
+        statement.executeUpdate();
     }
 
     public boolean existHotel(int hotelID) throws SQLException{
@@ -60,6 +59,7 @@ public class HotelDao {
             hotel.setAddress(resultSet.getString("hotel_address"));
             hotel.setCity(resultSet.getString("hotel_city"));
             hotel.setRating(resultSet.getFloat("hotel_rating"));
+            hotel.setHotelCategoryID(resultSet.getInt("id_category"));
         }
 
         return Optional.ofNullable(hotel);
@@ -97,8 +97,27 @@ public class HotelDao {
     public ArrayList<Hotel> findAllHotels() throws SQLException{
         ArrayList<Hotel> hotels = new ArrayList<>();
 
-        String sql = "SELECT * FROM (SELECT Q.*, ROWNUM RO FROM (SELECT id_hotel, hotel_name, hotel_address, hotel_city, hotel_rating, id_category FROM HOTEL ORDER BY hotel_name) Q WHERE ROWNUM <= 5) WHERE RO >= 1";
+        String sql = "SELECT * FROM HOTEL ORDER BY HOTEL_NAME";
         PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()){
+            Hotel hotel = fromResultSet(resultSet);
+            hotels.add(hotel);
+        }
+        return hotels;
+    }
+
+    public ArrayList<Hotel> findAllHotels(int max) throws SQLException{
+        ArrayList<Hotel> hotels = new ArrayList<>();
+
+        String sql = "SELECT * FROM (SELECT Q.*, ROWNUM RO FROM (SELECT id_hotel, hotel_name, hotel_address, hotel_city, hotel_rating, id_category FROM HOTEL ORDER BY hotel_name) Q WHERE ROWNUM <= ?) WHERE RO >= ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        int min = max - Constants.OFFSET_PAGE;
+
+        statement.setInt(1, min);
+        statement.setInt(2, max);
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()){

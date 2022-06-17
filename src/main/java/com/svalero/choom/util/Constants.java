@@ -7,4 +7,6 @@ public class Constants {
 
     public static final String USERNAME = "CHOOMUSER";
     public static final String PASSWORD = "CHOOM1234";
+
+    public static final int OFFSET_PAGE = 4;
 }
