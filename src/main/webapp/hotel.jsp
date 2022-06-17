@@ -81,7 +81,7 @@
     <%
         } catch (SQLException sqle) {
     %>
-        <div class='alert alert-danger' role='alert'>Se ha producido al cargar los datos del libro</div>
+        <div class='alert alert-danger' role='alert'>ERROR: Can not connect to database</div>
     <%
         }
     %>

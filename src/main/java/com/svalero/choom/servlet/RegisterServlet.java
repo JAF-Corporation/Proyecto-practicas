@@ -37,13 +37,10 @@ public class RegisterServlet extends HttpServlet {
         try {
             if (action.equals("register")) {
                 userDao.add(user);
-                out.println("<div class='alert alert-success' role='alert'>El usuario se ha registrado correctamente</div>");
-            } else {
-                //userDao.modify(userId, user);
-                out.println("<div class='alert alert-success' role='alert'>El usuario se ha modificado correctamente</div>");
+                out.println("<div class='alert alert-success' role='alert'>User has been successfully modified</div>");
             }
         } catch (SQLException sqle) {
-            out.println("<div class='alert alert-danger' role='alert'>Se ha producido un error al registrar el articulo</div>");
+            out.println("<div class='alert alert-danger' role='alert'>ERROR: Can not connect to database</div>");
             sqle.printStackTrace();
         } catch (UserAlreadyExistException uaee) {
             out.println("<div class='alert alert-danger' role='alert'>ERROR: User already exists</div>");

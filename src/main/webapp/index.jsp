@@ -240,7 +240,7 @@
                         } catch (SQLException sqle) {
                             sqle.printStackTrace();
                      %>
-                             <div class="alert alert-danger" role="alert">Error conectando con la base de datos</div>
+                             <div class="alert alert-danger" role="alert">ERROR: Can not connect to database</div>
                      <%
                         }
                      %>
