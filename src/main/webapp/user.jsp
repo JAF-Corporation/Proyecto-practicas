@@ -6,13 +6,15 @@
 <%
   User currentUser = (User) session.getAttribute("currentUser");
   if (currentUser == null) {
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("login.jsp");
   }
 
 %>
 
 <html>
 <head>
+  <title>User</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -60,6 +62,7 @@
           <input type="hidden" name="userID" value="<% if (currentUser != null) out.print(currentUser.getUserID()); %>">
           <input type="hidden" name="role" value="<% if (currentUser != null) out.print(currentUser.getRole()); %>">
           <button type="submit" class="btn btn-primary">Modify</button>
+          <button type="button" onclick="window.location.href='index.jsp'" class="btn btn-secondary">Back</button>
         </form>
         <div id="result"></div>
       </div>
